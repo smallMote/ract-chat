@@ -8,6 +8,12 @@ function mapStateToProps(state) {
 }
 
 class DialogViewer extends Component {
+  state = {
+    messageList: []
+  }
+  appendMessage = () => {
+
+  }
   render() {
     return (
       <div className="dialog-viewer">

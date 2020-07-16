@@ -22,9 +22,19 @@ module.exports = {
       {
         test: /\.js$/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: [ '@babel/preset-env' ],
+            plugins: [
+              // 处理ES7中的类转换
+              ['@babel/plugin-proposal-class-properties', { loose: true }],
+              // 处理生成器等一些高级内置语法
+              '@babel/plugin-transform-runtime'
+            ]
+          }
         },
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        include: path.resolve('src')
       },
       // css
       {

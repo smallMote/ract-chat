@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chart</title>
+  <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.onload = function () {
+      // let $html = document.getElementsByTagName('html');
+      // let rootFontSize = $html[0].style.fontSize;
+      // if (rootFontSize && typeof rootFontSize === 'string') {
+      //   rootFontSize = Number(rootFontSize.replace('px', '')) * 10;
+      // }
+      // iPhone|iPhone OS|Phone|iPod|iOS
+      /(iPad)/i.test(navigator.userAgent)&&(head=document.getElementsByTagName('head'),
+        viewport = document.createElement('meta'),
+        viewport.name='viewport',
+        viewport.content='target-densitydpi=device-dpi,width=480px,user-scalable=no',
+      head.length>0 && head[head.length-1].appendChild(viewport));
+    }
+  </script>
+</body>
+</html>

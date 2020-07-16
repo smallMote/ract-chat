@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import DialogWindow from './components/DialogueWindow'
+import UserList from "@/pages/UserList";
 // import Dialog from './pages/Dialog'
 
 function mapStateToProps(state) {
@@ -10,10 +12,12 @@ function mapStateToProps(state) {
 class App extends Component {
   render() {
     return (
-      <div>
-        {/*<Dialog/>*/}
-        <DialogWindow/>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact  path="/" component={UserList}/>
+          <Route exact  path="/dialog/:id" component={DialogWindow}/>
+        </Switch>
+      </Router>
     )
   }
 }

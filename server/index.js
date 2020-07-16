@@ -5,7 +5,7 @@ const port = 10086
 const server = websocket.createServer({}, function (conn) {
   conn.on('text', function (str) { // 链接监听事件
     console.log('接收到消息：', str)
-    conn.sendText(str) // 发送消息
+    // conn.sendText(str) // 发送消息
   })
 
   conn.on('close', function (code, reason) {

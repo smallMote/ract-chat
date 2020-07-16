@@ -1,0 +1,22 @@
+.user-list-item {
+  display: flex;
+  align-items: center;
+  .avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 24px;
+    margin-bottom: 24px;
+  }
+  .media {
+    padding-bottom: 24px;
+    width: calc(100% - 80px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .current-message {
+    color: #cccccc;
+    font-size: 24px;
+  }
+}

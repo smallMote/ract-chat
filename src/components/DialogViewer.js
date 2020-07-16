@@ -8,17 +8,20 @@ function mapStateToProps(state) {
 }
 
 class DialogViewer extends Component {
-  state = {
-    messageList: []
-  }
-  appendMessage = () => {
-
-  }
   render() {
+    const { messageList } = this.props
     return (
       <div className="dialog-viewer">
-        <DialogMessage/>
-        <DialogMessage reverse/>
+        {
+          messageList.map((item, index) => {
+            return <DialogMessage
+              key={index}
+              message={item.message}
+              reverse={item.reverse}
+            />
+          })
+        }
+        {/*<DialogMessage reverse/>*/}
       </div>
     )
   }

@@ -10,6 +10,9 @@ function mapStateToProps(state) {
 }
 
 class DialogueWindow extends Component {
+  state = {
+    messageList: []
+  }
   constructor(props) {
     super(props)
     const _this = this
@@ -17,8 +20,8 @@ class DialogueWindow extends Component {
       const ws = new WebSocket('ws://localhost:10086')
       this.ws = ws
       ws.onopen = function(e){
-        console.log('连接服务器成功');
-        ws.send('客户端连接服务器成功');
+        // console.log('连接服务器成功');
+        ws.send('客户端连接服务器成功1');
       }
 
       ws.onerror = function(){
@@ -27,7 +30,11 @@ class DialogueWindow extends Component {
 
       ws.onmessage = function(e){
         const data = e.data // 获取到服务端发送来的数据
-        _this.appendMessage(data)
+        _this.appendMessage({
+          message: data,
+          reverse: false,
+          uuid: 1
+        })
       }
     }
   }
@@ -35,17 +42,25 @@ class DialogueWindow extends Component {
   // 发送消息
   sendMessage = (message) => {
     this.ws.send(message)
+    this.appendMessage({
+      message, reverse: true
+    })
   }
   // 添加消息
   appendMessage = (data) => {
-
+    const messageList = [...this.state.messageList]
+    messageList.push(data)
+    console.log(messageList)
+    this.setState({
+      messageList
+    })
   }
   render() {
     return (
       <div className='dialog-container'>
         <NavigationHead/>
         <DialogViewer
-          appendMessage={this.appendMessage}
+          messageList={this.state.messageList}
         />
         <DialogueBottom
           sendMessage={this.sendMessage}

@@ -26,6 +26,7 @@ class DialogueBottom extends Component {
           onChange={(e) => {
             this.setState({ message: this.$input.value })
           }}
+          onKeyDown={(e) => e.keyCode === 13 && this.sendMessage()}
           type="text"
         />
         <span className="icon-btn">

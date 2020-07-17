@@ -38,7 +38,7 @@ class UserList extends Component {
 							<Link
 								className="list-item"
 								key={`user-list-item-${item.uuid}`}
-								to={`/dialog/${item.uuid}`}>
+								to={`/dialog?uuid=${item.uuid}&nickName=${item.nickName}`}>
 								<UserListItem
 									uuid={item.uuid}
 									avatar={item.avatar}

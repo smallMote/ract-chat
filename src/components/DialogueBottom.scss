@@ -5,6 +5,7 @@
   background-color: #f2f3f4;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   input {
     width: calc(100% - 140px);
     height: 60px;
@@ -16,7 +17,9 @@
   }
   .send-btn {
     background-color: $theme-color;
-    display: inline-block;
+    display: block;
+    width: 125px;
+    height: 60px;
     color: #fff;
     padding: 3px;
     font-size: 28px;

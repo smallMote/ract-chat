@@ -4,6 +4,7 @@ import DialogViewer from './DialogViewer'
 import NavigationHead from './NavigationHead'
 import DialogueBottom from './DialogueBottom'
 import './DialogWindow.scss'
+import {getSearchParams} from "@/utils"
 
 function mapStateToProps(state) {
   return {}
@@ -11,6 +12,10 @@ function mapStateToProps(state) {
 
 class DialogueWindow extends Component {
   state = {
+    target: {
+      uuid: null,
+      nickName: null
+    },
     messageList: []
   }
   constructor(props) {
@@ -21,7 +26,10 @@ class DialogueWindow extends Component {
       this.ws = ws
       ws.onopen = function(e){
         // console.log('连接服务器成功');
-        ws.send('客户端连接服务器成功1');
+        // ws.send(JSON.stringify({
+        //   uuid: 1,
+        //   message: '客户端连接服务器成功'
+        // }))
       }
 
       ws.onerror = function(){
@@ -29,6 +37,7 @@ class DialogueWindow extends Component {
       }
 
       ws.onmessage = function(e){
+        console.log(e)
         const data = e.data // 获取到服务端发送来的数据
         _this.appendMessage({
           message: data,
@@ -38,10 +47,22 @@ class DialogueWindow extends Component {
       }
     }
   }
+  UNSAFE_componentWillMount() {
+    const { search } = this.props.location
+    this.setState({
+      target: getSearchParams(search)
+    })
+  }
 
   // 发送消息
   sendMessage = (message) => {
-    this.ws.send(message)
+    const sendData = JSON.stringify({
+      uuid: 1, // 当前用户的uuid
+      target: this.state.target,
+      message
+    })
+    console.log(sendData)
+    this.ws.send(sendData)
     this.appendMessage({
       message, reverse: true
     })
@@ -50,7 +71,6 @@ class DialogueWindow extends Component {
   appendMessage = (data) => {
     const messageList = [...this.state.messageList]
     messageList.push(data)
-    console.log(messageList)
     this.setState({
       messageList
     })
@@ -58,7 +78,9 @@ class DialogueWindow extends Component {
   render() {
     return (
       <div className='dialog-container'>
-        <NavigationHead/>
+        <NavigationHead
+          nickName={this.state.target.nickName}
+        />
         <DialogViewer
           messageList={this.state.messageList}
         />

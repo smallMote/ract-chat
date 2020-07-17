@@ -4,6 +4,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
   entry: './src/index.js',
   devtool: 'eval-source-map',
+  devServer: {
+    open: true
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('public/index.html')

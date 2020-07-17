@@ -29,9 +29,9 @@ class DialogueBottom extends Component {
           onKeyDown={(e) => e.keyCode === 13 && this.sendMessage()}
           type="text"
         />
-        <span className="icon-btn">
-          <i className="iconfont icon-radius-plus"/>
-        </span>
+        {/*<span className="icon-btn">*/}
+        {/*  <i className="iconfont icon-radius-plus"/>*/}
+        {/*</span>*/}
         <button onClick={this.sendMessage} className="send-btn">
           发送
         </button>

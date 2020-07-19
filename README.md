@@ -6,3 +6,7 @@
   "presets": ["@babel/preset-react"]
 }
 ```
+### 执行多命令（concurrently）
+```bash
+yarn add concurrently -D
+```

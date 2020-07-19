@@ -21,15 +21,17 @@ class DialogueWindow extends Component {
   constructor(props) {
     super(props)
     const _this = this
+    const { search } = this.props.location
     if (window.WebSocket) {
       const ws = new WebSocket('ws://localhost:10086')
       this.ws = ws
       ws.onopen = function(e){
-        // console.log('连接服务器成功');
-        // ws.send(JSON.stringify({
-        //   uuid: 1,
-        //   message: '客户端连接服务器成功'
-        // }))
+        // console.log('连接服务器成功', e);
+        ws.send(JSON.stringify({
+          uuid: 1,
+          target: getSearchParams(search),
+          message: '客户端连接服务器成功'
+        }))
       }
 
       ws.onerror = function(){
@@ -37,12 +39,15 @@ class DialogueWindow extends Component {
       }
 
       ws.onmessage = function(e){
-        console.log(e)
-        const data = e.data // 获取到服务端发送来的数据
-        _this.appendMessage({
-          message: data,
-          reverse: false,
-          uuid: 1
+        let data = e.data // 获取到服务端发送来的数据
+        data = JSON.parse(data)
+        // console.log(data)
+        data.data.forEach(item => {
+          _this.appendMessage({
+            message: item.message,
+            reverse: true,
+            uuid: item.target.uuid
+          })
         })
       }
     }

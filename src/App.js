@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {HashRouter as Router, Switch, Route } from 'react-router-dom'
 import DialogWindow from './components/DialogueWindow'
-import UserList from "@/pages/UserList";
+import UserList from '@/pages/UserList'
+import Login from '@/pages/Login'
 // import Dialog from './pages/Dialog'
 
 function mapStateToProps(state) {
@@ -14,8 +15,9 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact  path="/" component={UserList}/>
-          <Route exact  path="/dialog" component={DialogWindow}/>
+          <Route exact  path='/' component={UserList}/>
+          <Route exact  path='/login' component={Login}/>
+          <Route exact  path='/dialog' component={DialogWindow}/>
         </Switch>
       </Router>
     )

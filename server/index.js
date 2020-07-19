@@ -40,9 +40,10 @@ const server = websocket.createServer({}, function (conn) {
       target,
       message
     })
+    // console.log('dataBase', JSON.stringify(dataBase[sendUserIndex]))
     // 发送关于当前对话对象的所有消息
     conn.sendText(JSON.stringify({
-      data: dataBase[sendUserIndex].dialogs.filter(item => Number(item.uuid) === Number(target.uuid))
+      data: dataBase[sendUserIndex].dialogs.filter(item => Number(item.target.uuid) === Number(target.uuid))
     }))
   })
 
